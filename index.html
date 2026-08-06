@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Painel da Loja · Mastercon Consórcios</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -536,7 +539,7 @@ td.who .tm{font-size:11.5px;color:var(--muted);font-weight:400}
 
     <div class="card" style="margin-bottom:16px">
       <h2 id="resumoSupTit">Supervisores no mês</h2>
-      <p class="h2sub">Realizado de julho contra Base, Meta e Super Meta mensais de cada equipe.</p>
+      <p class="h2sub" id="resumoSupSub">Realizado do mês contra Base, Meta e Super Meta mensais de cada equipe.</p>
       <div id="resumoSup"></div>
     </div>
 
@@ -1050,7 +1053,6 @@ function render(){
   document.getElementById('metaSub').innerHTML = mv
     ? (S.sup ? `Equipe ${CAP(S.sup)} · meta somada dos meses selecionados.`
              : `Loja inteira · soma das metas das equipes ativas em cada mês selecionado.`)
-      + (nMeses>1 ? ` <span style="color:var(--energy)">A planilha traz apenas a meta de julho/2026; ela é repetida nos demais meses como referência.</span>` : '')
     : 'Sem comparativo: filtros de segmento, seguro ou consultor não possuem meta definida.';
   document.getElementById('thermoGeral').innerHTML = (mv
     ? thermo({titulo: S.sup?`Equipe ${CAP(S.sup)}`:'Loja', real:a.cred,
@@ -1647,6 +1649,8 @@ function renderResumo(){
   /* ── Supervisores (réguas compactas) ── */
   document.getElementById('resumoSupTit').textContent =
     RES.sup ? `Equipe ${CAP(RES.sup)} no mês` : 'Supervisores no mês';
+  document.getElementById('resumoSupSub').textContent =
+    `Realizado de ${nomeMes.toLowerCase()} contra Base, Meta e Super Meta mensais de cada equipe.`;
   const supCards = alvoSups.map(sup=>{
     const rs = rowsMes.filter(r=>r[M_SUP]===sup);
     const x = agregar(rs);
